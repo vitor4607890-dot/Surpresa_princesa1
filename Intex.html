@@ -1,728 +1,696 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Minha Princesa 💜</title>
+<title>Surpresa Princesa 💜</title>
 
 <style>
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  font-family: Georgia, "Times New Roman", serif;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,.12), transparent 25%),
-    radial-gradient(circle at 80% 15%, rgba(220,170,255,.18), transparent 30%),
-    radial-gradient(circle at 50% 90%, rgba(230,190,255,.15), transparent 35%),
-    radial-gradient(circle at 10% 80%, rgba(180,100,240,.2), transparent 25%),
-    linear-gradient(135deg, #351452, #5e2780 40%, #8d4bb5 75%, #c58be5);
-  color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #120018, #4b176b, #b66cff);
+    color: white;
 }
 
-/* LUZES DO FUNDO */
+/* INTRODUÇÃO */
 
-.luz {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(55px);
-  opacity: .35;
-  pointer-events: none;
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    transition: opacity 2s ease;
 }
 
-.luz1 {
-  width: 180px;
-  height: 180px;
-  background: #e5b7ff;
-  top: 5%;
-  left: -40px;
-  animation: flutuar 7s ease-in-out infinite alternate;
+#intro.saindo {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.luz2 {
-  width: 220px;
-  height: 220px;
-  background: #c47aff;
-  bottom: -70px;
-  right: -50px;
-  animation: flutuar 9s ease-in-out infinite alternate-reverse;
+.intro-text {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.4;
+    animation: aparecer 2s ease;
 }
 
-.luz3 {
-  width: 130px;
-  height: 130px;
-  background: #ffffff;
-  top: 45%;
-  right: 10%;
-  opacity: .12;
-  animation: flutuar 6s ease-in-out infinite alternate;
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-@keyframes flutuar {
-  from {
-    transform: translate(0, 0);
-  }
-  to {
-    transform: translate(35px, -25px);
-  }
+/* SITE */
+
+#site {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.page {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+    animation: pageIn .7s ease;
+}
+
+.page.active {
+    display: flex;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h1 {
+    font-size: 34px;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0,0,0,.35);
+}
+
+p {
+    font-size: 19px;
+    line-height: 1.6;
 }
 
 /* ESTRELAS */
 
-.estrela {
-  position: fixed;
-  width: 3px;
-  height: 3px;
-  background: white;
-  border-radius: 50%;
-  opacity: .7;
-  animation: brilho 3s infinite ease-in-out;
+.star {
+    position: absolute;
+    color: white;
+    opacity: .7;
+    animation: brilho 2s infinite alternate;
 }
 
-.e1 { top: 12%; left: 18%; }
-.e2 { top: 25%; left: 82%; animation-delay: .8s; }
-.e3 { top: 70%; left: 12%; animation-delay: 1.5s; }
-.e4 { top: 82%; left: 78%; animation-delay: 2s; }
-.e5 { top: 40%; left: 90%; animation-delay: .4s; }
-.e6 { top: 58%; left: 5%; animation-delay: 1.2s; }
-.e7 { top: 8%; left: 55%; animation-delay: 2.2s; }
-.e8 { top: 92%; left: 40%; animation-delay: .6s; }
+.star:nth-child(1) {
+    top: 10%;
+    left: 15%;
+}
+
+.star:nth-child(2) {
+    top: 25%;
+    right: 12%;
+}
+
+.star:nth-child(3) {
+    bottom: 18%;
+    left: 10%;
+}
+
+.star:nth-child(4) {
+    bottom: 10%;
+    right: 18%;
+}
 
 @keyframes brilho {
-  0%,100% {
-    opacity: .2;
-    transform: scale(.7);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.5);
-  }
-}
+    from {
+        opacity: .2;
+        transform: scale(.7);
+    }
 
-/* PÁGINAS */
-
-.pagina {
-  position: absolute;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 25px;
-}
-
-.pagina.ativa {
-  display: flex;
-}
-
-/* TEXTOS */
-
-h1 {
-  font-size: 34px;
-  margin-bottom: 15px;
-  text-shadow: 0 4px 15px rgba(0,0,0,.3);
-}
-
-h2 {
-  font-size: 25px;
-  margin-bottom: 15px;
-}
-
-p {
-  max-width: 500px;
-  line-height: 1.7;
-  font-size: 17px;
-}
-
-/* BOTÕES */
-
-.botao {
-  margin-top: 25px;
-  padding: 14px 27px;
-  border: none;
-  border-radius: 30px;
-  background: white;
-  color: #6b328b;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.25),
-    0 0 20px rgba(255,255,255,.25);
-  transition: .25s;
-}
-
-.botao:hover {
-  transform: translateY(-3px) scale(1.04);
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
 }
 
 /* CORAÇÃO */
 
-.coracao {
-  position: relative;
-  width: 105px;
-  height: 105px;
-  background: #b86cff;
-  transform: rotate(-45deg);
-  margin: 30px 0;
-  border-radius: 12px;
-  box-shadow:
-    0 0 12px rgba(255,255,255,.8),
-    0 0 30px rgba(201,125,255,.75),
-    0 18px 30px rgba(35,8,55,.55);
-  animation: pulsar 1.8s infinite ease-in-out;
+.heart {
+    width: 130px;
+    height: 130px;
+    background: #ff4f9a;
+    position: relative;
+    transform: rotate(-45deg);
+    margin: 35px 0 50px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.35);
+    animation: pulsar 1.5s infinite;
 }
 
-.coracao::before,
-.coracao::after {
-  content: "";
-  position: absolute;
-  width: 105px;
-  height: 105px;
-  background: #b86cff;
-  border-radius: 50%;
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background: #ff4f9a;
+    border-radius: 50%;
 }
 
-.coracao::before {
-  top: -52px;
-  left: 0;
+.heart::before {
+    top: -65px;
+    left: 0;
 }
 
-.coracao::after {
-  left: 52px;
-  top: 0;
+.heart::after {
+    top: 0;
+    left: 65px;
 }
 
-.coracao span {
-  position: absolute;
-  z-index: 5;
-  width: 160px;
-  left: -27px;
-  top: 40px;
-  transform: rotate(45deg);
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 2px 8px rgba(70,20,100,.5);
+.heart-text {
+    position: absolute;
+    z-index: 5;
+    width: 220px;
+    left: -45px;
+    top: 45px;
+    transform: rotate(45deg);
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
 }
 
 @keyframes pulsar {
-  0%,100% {
-    transform: rotate(-45deg) scale(1);
-  }
-  50% {
-    transform: rotate(-45deg) scale(1.06);
-  }
+    0%, 100% {
+        transform: rotate(-45deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(-45deg) scale(1.08);
+    }
 }
 
-/* EU TE AMO PASSANDO */
+/* BOTÃO */
 
-.eu-te-amo {
-  position: fixed;
-  z-index: 20;
-  white-space: nowrap;
-  pointer-events: none;
-  font-family: Georgia, serif;
-  font-weight: bold;
-  color: rgba(255,255,255,.82);
-  text-shadow: 0 0 12px rgba(255,255,255,.35);
-  animation: passar 13s linear forwards;
+button {
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    background: white;
+    color: #7b2cbf;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,.3);
+    transition: .2s;
 }
 
-@keyframes passar {
-  from {
-    transform: translateX(110vw);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: .85;
-  }
-
-  75% {
-    opacity: .85;
-  }
-
-  to {
-    transform: translateX(-120vw);
-    opacity: 0;
-  }
+button:active {
+    transform: scale(.94);
 }
 
-/* PÁGINA 2 */
+/* CARTINHA */
 
-.numero {
-  font-size: 100px;
-  font-weight: bold;
-  text-shadow:
-    0 8px 20px rgba(0,0,0,.3),
-    0 0 25px rgba(255,255,255,.25);
+.paper {
+    width: min(90%, 430px);
+    min-height: 360px;
+    background: #fffdf8;
+    color: #4b275e;
+    padding: 35px 28px;
+    border-radius: 5px;
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.4),
+        inset 0 0 30px rgba(150,100,50,.08);
+    transform: rotate(-1deg);
+    position: relative;
 }
 
-/* PAPEL */
-
-.pagina3 {
-  perspective: 1000px;
+.paper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 45px solid #e8e1d5;
+    border-right: 45px solid transparent;
 }
 
-.folha {
-  position: relative;
-  width: 88%;
-  max-width: 330px;
-  height: 440px;
-  padding: 32px 26px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(120,90,70,.08),
-      transparent 8%,
-      transparent 92%,
-      rgba(120,90,70,.09)
-    ),
-    linear-gradient(
-      180deg,
-      #fffefa,
-      #fffdf7 45%,
-      #faf5e9
-    );
-  color: #603477;
-  border-radius: 4px;
-  transform: rotate(-1deg);
-  box-shadow:
-    0 28px 50px rgba(25,5,45,.50),
-    0 8px 15px rgba(25,5,45,.30),
-    inset 0 0 35px rgba(130,100,70,.08);
-  overflow: hidden;
+.paper h2 {
+    margin-bottom: 20px;
+    font-size: 27px;
 }
 
-/* textura suave */
-
-.folha::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      115deg,
-      transparent 0%,
-      rgba(255,255,255,.8) 45%,
-      transparent 48%
-    );
-  opacity: .45;
-}
-
-/* DOBRINHA VERTICAL */
-
-.folha::after {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 72%;
-  width: 1px;
-  height: 500px;
-  background: linear-gradient(
-    to right,
-    rgba(80,50,30,.02),
-    rgba(80,50,30,.20),
-    rgba(255,255,255,.75),
-    rgba(80,50,30,.05)
-  );
-  transform: rotate(1deg);
-  opacity: .65;
-}
-
-/* DOBRINHA SUPERIOR */
-
-.dobra-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 45px;
-  background:
-    linear-gradient(
-      175deg,
-      rgba(120,90,70,.16),
-      rgba(255,255,255,.7) 45%,
-      transparent 75%
-    );
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% 20%,
-    72% 38%,
-    45% 25%,
-    18% 42%,
-    0 25%
-  );
-  opacity: .7;
-}
-
-/* DOBRINHA INFERIOR */
-
-.dobra-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 55px;
-  background:
-    linear-gradient(
-      5deg,
-      rgba(100,70,45,.18),
-      rgba(255,255,255,.7) 48%,
-      transparent 75%
-    );
-  clip-path: polygon(
-    0 100%,
-    100% 100%,
-    100% 65%,
-    75% 48%,
-    52% 72%,
-    25% 55%,
-    0 70%
-  );
-  opacity: .65;
-}
-
-/* DOBRINHA LATERAL */
-
-.dobra-lateral {
-  position: absolute;
-  right: 0;
-  top: 80px;
-  width: 35px;
-  height: 260px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(100,70,45,.12),
-    rgba(255,255,255,.7)
-  );
-  clip-path: polygon(
-    100% 0,
-    100% 100%,
-    20% 92%,
-    65% 75%,
-    25% 50%,
-    70% 28%,
-    30% 8%
-  );
-  opacity: .7;
-}
-
-.conteudo-folha {
-  position: relative;
-  z-index: 5;
-  height: 100%;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-
-.conteudo-folha::-webkit-scrollbar {
-  display: none;
-}
-
-.folha h2 {
-  font-size: 23px;
-  margin-bottom: 18px;
-}
-
-.folha p {
-  font-size: 15.5px;
-  line-height: 1.65;
-  margin-bottom: 13px;
+.paper p {
+    font-size: 17px;
+    text-align: left;
+    line-height: 1.7;
 }
 
 /* PRESENTE */
 
-.presente {
-  font-size: 85px;
-  filter:
-    drop-shadow(0 15px 18px rgba(30,5,50,.4))
-    drop-shadow(0 0 15px rgba(255,255,255,.2));
-  animation: presente 2s infinite ease-in-out;
+.gift {
+    position: relative;
+    width: 150px;
+    height: 130px;
+    margin: 30px;
+    animation: giftFloat 2s infinite ease-in-out;
 }
 
-@keyframes presente {
-  0%,100% {
-    transform: translateY(0) rotate(-3deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(3deg);
-  }
+.gift-box {
+    position: absolute;
+    bottom: 0;
+    width: 150px;
+    height: 100px;
+    background: #ff70ad;
+    border-radius: 5px;
 }
 
-/* CORAÇÕES FINAIS */
+.gift-box::before {
+    content: "";
+    position: absolute;
+    left: 60px;
+    width: 30px;
+    height: 100%;
+    background: #ffd1e5;
+}
 
-.coracao-caindo {
-  position: fixed;
-  top: -30px;
-  color: #f2c9ff;
-  font-size: 20px;
-  pointer-events: none;
-  animation: cair linear forwards;
-  z-index: 50;
+.gift-lid {
+    position: absolute;
+    top: 15px;
+    left: -8px;
+    width: 166px;
+    height: 30px;
+    background: #ff8abb;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.bow {
+    position: absolute;
+    top: -25px;
+    left: 48px;
+    width: 55px;
+    height: 40px;
+    z-index: 3;
+}
+
+.bow::before,
+.bow::after {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border: 8px solid #ffd1e5;
+    border-radius: 50% 50% 50% 0;
+}
+
+.bow::before {
+    transform: rotate(30deg);
+}
+
+.bow::after {
+    right: 0;
+    transform: rotate(60deg);
+}
+
+@keyframes giftFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* FINAL */
+
+.final-heart {
+    font-size: 80px;
+    animation: finalPulse 1.2s infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes finalPulse {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+.final-message {
+    max-width: 500px;
+    font-size: 21px;
+}
+
+/* CORAÇÕES CAINDO */
+
+.falling-heart {
+    position: fixed;
+    top: -30px;
+    font-size: 22px;
+    animation: cair linear forwards;
+    pointer-events: none;
+    z-index: 10;
 }
 
 @keyframes cair {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.love-changing {
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    min-height: 30px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- FUNDO -->
+<!-- INTRO -->
 
-<div class="luz luz1"></div>
-<div class="luz luz2"></div>
-<div class="luz luz3"></div>
-
-<div class="estrela e1"></div>
-<div class="estrela e2"></div>
-<div class="estrela e3"></div>
-<div class="estrela e4"></div>
-<div class="estrela e5"></div>
-<div class="estrela e6"></div>
-<div class="estrela e7"></div>
-<div class="estrela e8"></div>
-
-
-<!-- PÁGINA 1 -->
-
-<section class="pagina ativa" id="pagina1">
-
-  <p>Tenho uma coisa para você... 💜</p>
-
-  <p style="margin-top:8px;">
-    Uma pequena surpresa feita especialmente para a minha princesa.
-  </p>
-
-  <div class="coracao">
-    <span>PRINCESA</span>
-  </div>
-
-  <button class="botao" onclick="proximaPagina(2)">
-    Abrir surpresa 💌
-  </button>
-
-</section>
-
-
-<!-- PÁGINA 2 -->
-
-<section class="pagina" id="pagina2">
-
-  <div class="numero">1</div>
-
-  <h1>MÊS COM VOCÊ 💜</h1>
-
-  <p>
-    Pode parecer pouco tempo, mas esse mês já foi suficiente
-    para você se tornar alguém muito especial para mim. ✨
-  </p>
-
-  <button class="botao" onclick="proximaPagina(3)">
-    Continuar 💜
-  </button>
-
-</section>
-
-
-<!-- PÁGINA 3 -->
-
-<section class="pagina pagina3" id="pagina3">
-
-  <div class="folha">
-
-    <div class="dobra-top"></div>
-    <div class="dobra-bottom"></div>
-    <div class="dobra-lateral"></div>
-
-    <div class="conteudo-folha">
-
-      <h2>Para minha princesa 💌</h2>
-
-      <p>
-        Feliz 1 mês para nós. 💜
-      </p>
-
-      <p>
-        Eu queria fazer alguma coisa especial para marcar
-        esse nosso primeiro mês juntos.
-      </p>
-
-      <p>
-        Talvez eu não consiga colocar em palavras tudo o que
-        sinto, mas quero que você saiba que cada momento
-        com você se tornou importante para mim.
-      </p>
-
-      <p>
-        Obrigado por estar comigo, por cada conversa,
-        cada risada e por fazer meus dias ficarem ainda
-        mais especiais.
-      </p>
-
-      <p>
-        Espero que esse seja apenas o começo de muitos
-        momentos que ainda vamos viver juntos. ✨
-      </p>
-
-      <p>
-        Feliz 1 mês para nós. ❤️
-      </p>
-
+<div id="intro">
+    <div class="intro-text" id="introText">
+        eu te amo... 💜
     </div>
-  </div>
+</div>
 
-  <button class="botao" onclick="proximaPagina(4)">
-    Tem mais uma coisa... 👀
-  </button>
+<!-- SITE -->
 
-</section>
+<div id="site">
+
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+
+    <!-- PÁGINA 1 -->
+
+    <section class="page active" id="page1">
+
+        <h1>Minha princesa 💜</h1>
+
+        <div class="heart">
+            <div class="heart-text">PRINCESA 💜</div>
+        </div>
+
+        <p>
+            Eu preparei uma pequena surpresa<br>
+            especialmente para você.
+        </p>
+
+        <div class="love-changing" id="loveText">
+            eu te amo 💜
+        </div>
+
+        <button onclick="nextPage()">
+            Abrir surpresa ✨
+        </button>
+
+    </section>
 
 
-<!-- PÁGINA 4 -->
+    <!-- PÁGINA 2 -->
 
-<section class="pagina" id="pagina4">
+    <section class="page" id="page2">
 
-  <div class="presente">🎁</div>
+        <div class="paper">
 
-  <h1>Espera...</h1>
+            <h2>Para minha princesa 💜</h2>
 
-  <p>
-    Você achou que a surpresa tinha acabado? 👀
-  </p>
+            <p>
+                Eu queria fazer alguma coisa diferente
+                para mostrar o quanto você é especial
+                para mim.
+                <br><br>
 
-  <p style="margin-top:8px;">
-    Ainda falta uma última coisa.
-  </p>
+                Pode parecer apenas uma página,
+                mas cada detalhe foi feito pensando
+                em você.
+                <br><br>
 
-  <button class="botao" onclick="finalizar()">
-    Abrir última surpresa 💜
-  </button>
+                Obrigado por todos os momentos,
+                pelas conversas, pelas risadas e
+                por fazer meus dias mais especiais.
+                <br><br>
 
-</section>
+                Feliz nosso primeiro mês. 💜
+            </p>
+
+        </div>
+
+        <button onclick="nextPage()">
+            Tem mais... 💜
+        </button>
+
+    </section>
 
 
-<!-- PÁGINA 5 -->
+    <!-- PÁGINA 3 -->
 
-<section class="pagina" id="pagina5">
+    <section class="page" id="page3">
 
-  <div class="coracao">
-    <span>PRINCESA</span>
-  </div>
+        <h1>Tem um presente aqui 🎁</h1>
 
-  <h1>Para sempre minha princesa 💜</h1>
+        <div class="gift">
 
-  <p>
-    Esse é só o nosso primeiro mês...
-  </p>
+            <div class="bow"></div>
 
-  <p style="margin-top:8px;">
-    Feliz 1 mês para nós. 🥹💜
-  </p>
+            <div class="gift-lid"></div>
 
-</section>
+            <div class="gift-box"></div>
+
+        </div>
+
+        <p>
+            Não é um presente que dá para embrulhar...
+            <br>
+            é uma surpresa feita com carinho. 💜
+        </p>
+
+        <button onclick="nextPage()">
+            Abrir presente 🎁
+        </button>
+
+    </section>
+
+
+    <!-- PÁGINA 4 -->
+
+    <section class="page" id="page4">
+
+        <div class="final-heart">
+            💜
+        </div>
+
+        <h1>Minha princesa</h1>
+
+        <p class="final-message">
+            Que esse seja apenas o primeiro de
+            muitos momentos incríveis que ainda
+            vamos viver.
+            <br><br>
+
+            Você é muito especial para mim.
+            <br><br>
+
+            Feliz 1 mês. 💜
+        </p>
+
+        <button onclick="nextPage()">
+            Última surpresa ✨
+        </button>
+
+    </section>
+
+
+    <!-- PÁGINA 5 -->
+
+    <section class="page" id="page5">
+
+        <div class="final-heart">
+            💜
+        </div>
+
+        <h1>Eu te amo, princesa.</h1>
+
+        <p class="final-message">
+            Obrigado por fazer parte da minha vida.
+            <br><br>
+
+            Espero que essa pequena surpresa
+            tenha conseguido arrancar um sorriso
+            seu.
+            <br><br>
+
+            💜 Feliz nosso primeiro mês 💜
+        </p>
+
+    </section>
+
+</div>
 
 
 <script>
 
-/* TROCAR DE PÁGINA */
+/* INTRODUÇÃO */
 
-function proximaPagina(numero) {
+const frases = [
+    "eu te amo... 💜",
+    "eu penso em você mais do que imagina...",
+    "você é muito especial para mim. 💜",
+    "eu quero viver muitos momentos com você...",
+    "minha princesa 💜"
+];
 
-  document.querySelectorAll(".pagina").forEach(pagina => {
-    pagina.classList.remove("ativa");
-  });
+let fraseAtual = 0;
 
-  document.getElementById("pagina" + numero).classList.add("ativa");
-}
+const introText = document.getElementById("introText");
 
+const intervaloIntro = setInterval(() => {
 
-/* EU TE AMO PASSANDO */
+    fraseAtual++;
 
-function criarEuTeAmo() {
+    if (fraseAtual < frases.length) {
+        introText.style.opacity = "0";
 
-  const texto = document.createElement("div");
+        setTimeout(() => {
+            introText.textContent = frases[fraseAtual];
+            introText.style.opacity = "1";
+        }, 500);
+    }
 
-  texto.className = "eu-te-amo";
-  texto.innerHTML = "eu te amo 💜";
-
-  texto.style.top = (15 + Math.random() * 70) + "vh";
-
-  texto.style.fontSize =
-    (13 + Math.random() * 8) + "px";
-
-  texto.style.animationDuration =
-    (12 + Math.random() * 5) + "s";
-
-  document.body.appendChild(texto);
-
-  setTimeout(() => {
-    texto.remove();
-  }, 18000);
-}
+}, 2600);
 
 
-/* MAIS FREQUENTE */
+/* SAIR DA INTRO */
 
-setInterval(criarEuTeAmo, 2800);
+setTimeout(() => {
 
-setTimeout(criarEuTeAmo, 1500);
-setTimeout(criarEuTeAmo, 4000);
-setTimeout(criarEuTeAmo, 6500);
+    clearInterval(intervaloIntro);
 
+    const intro = document.getElementById("intro");
 
-/* FINAL */
-
-function finalizar() {
-
-  proximaPagina(5);
-
-  for (let i = 0; i < 45; i++) {
-
-    const coracao = document.createElement("div");
-
-    coracao.className = "coracao-caindo";
-    coracao.innerHTML = "💜";
-
-    coracao.style.left =
-      Math.random() * 100 + "vw";
-
-    coracao.style.fontSize =
-      (12 + Math.random() * 22) + "px";
-
-    coracao.style.animationDuration =
-      (4 + Math.random() * 5) + "s";
-
-    coracao.style.animationDelay =
-      Math.random() * 3 + "s";
-
-    document.body.appendChild(coracao);
+    intro.classList.add("saindo");
 
     setTimeout(() => {
-      coracao.remove();
-    }, 10000);
-  }
+        intro.remove();
+    }, 2000);
+
+}, 14500);
+
+
+/* NAVEGAÇÃO */
+
+let paginaAtual = 1;
+
+function nextPage() {
+
+    const atual = document.getElementById("page" + paginaAtual);
+
+    atual.classList.remove("active");
+
+    paginaAtual++;
+
+    const proxima = document.getElementById("page" + paginaAtual);
+
+    if (proxima) {
+        proxima.classList.add("active");
+    }
+
+    if (paginaAtual === 5) {
+        iniciarCoracoes();
+    }
+}
+
+
+/* TEXTOS DO CORAÇÃO */
+
+const mensagens = [
+    "eu te amo 💜",
+    "minha princesa 💜",
+    "você é especial 💜",
+    "feliz 1 mês 💜"
+];
+
+let mensagemAtual = 0;
+
+setInterval(() => {
+
+    const texto = document.getElementById("loveText");
+
+    if (!texto) return;
+
+    mensagemAtual++;
+
+    if (mensagemAtual >= mensagens.length) {
+        mensagemAtual = 0;
+    }
+
+    texto.style.opacity = "0";
+
+    setTimeout(() => {
+        texto.textContent = mensagens[mensagemAtual];
+        texto.style.opacity = "1";
+    }, 300);
+
+}, 2800);
+
+
+/* CORAÇÕES CAINDO */
+
+function criarCoracao() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "falling-heart";
+
+    heart.textContent = Math.random() > 0.5 ? "💜" : "💗";
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.animationDuration =
+        (3 + Math.random() * 4) + "s";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 7000);
+}
+
+
+function iniciarCoracoes() {
+
+    setInterval(() => {
+        criarCoracao();
+    }, 350);
+
 }
 
 </script>
 
 </body>
 </html>
-```
